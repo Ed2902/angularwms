@@ -1,0 +1,32 @@
+table {
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+thead {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.table-responsive {
+  max-height: 400px;
+  overflow-y: auto;
+}

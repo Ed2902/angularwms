@@ -1,0 +1,126 @@
+<div class="modal-content">
+  <div class="modal-body">
+    <form (ngSubmit)="onSubmit()" [formGroup]="ordenForm">
+      <div class="row g-2">
+        <!-- Campo FW -->
+        <div class="col-md-6">
+          <label for="fw" class="form-label">FW</label>
+          <input
+            type="text"
+            id="fw"
+            class="form-control form-control-sm"
+            formControlName="fw"
+            placeholder="Ingrese el FW"
+            required
+          />
+        </div>
+
+        <!-- Campo Fecha -->
+        <div class="col-md-6">
+          <label for="fecha" class="form-label">Fecha</label>
+          <input
+            type="text"
+            id="fecha"
+            class="form-control form-control-sm"
+            [value]="fechaActual"
+            disabled
+          />
+        </div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <!-- Campo Descripción -->
+        <div class="col-md-6">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea
+            id="descripcion"
+            class="form-control form-control-sm"
+            formControlName="descripcion"
+            placeholder="Ingrese la descripción"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Campo Estado -->
+        <div class="col-md-6">
+          <label for="estado" class="form-label">Estado</label>
+          <div class="d-flex justify-content-between">
+            <label class="btn btn-outline-secondary btn-sm">
+              <input
+                type="radio"
+                name="estado"
+                value="En_proceso"
+                formControlName="estado"
+              />
+              En_proceso
+            </label>
+            <label class="btn btn-outline-secondary btn-sm active">
+              <input
+                type="radio"
+                name="estado"
+                value="Pendiente"
+                formControlName="estado"
+              />
+              Pendiente
+            </label>
+            <label class="btn btn-outline-secondary btn-sm">
+              <input
+                type="radio"
+                name="estado"
+                value="Inactivo"
+                formControlName="estado"
+              />
+              Inactivo
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <!-- Campo Cliente -->
+        <div class="col-md-6">
+          <label for="cliente" class="form-label">Cliente</label>
+          <input
+            type="text"
+            id="cliente"
+            class="form-control form-control-sm"
+            formControlName="cliente"
+            placeholder="Ingrese el cliente"
+            required
+          />
+        </div>
+
+        <!-- Campo Proveedor -->
+        <div class="col-md-6">
+          <label for="proveedor" class="form-label">Proveedor</label>
+          <input
+            type="text"
+            id="proveedor"
+            class="form-control form-control-sm"
+            formControlName="proveedor"
+            placeholder="Ingrese el proveedor"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <!-- Campo Usuario -->
+        <div class="col-md-6">
+          <label for="usuario" class="form-label">Usuario</label>
+          <input
+            type="text"
+            id="usuario"
+            class="form-control form-control-sm"
+            [value]="usuarioMock"
+            disabled
+          />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button type="submit" class="btn btn-success btn-sm">Guardar Orden</button>
+      </div>
+    </form>
+  </div>
+</div>

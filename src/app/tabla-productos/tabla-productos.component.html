@@ -1,0 +1,128 @@
+<h1 class="text-center mb-4">Productos del Sistema</h1>
+<div class="container mt-3">
+  <!-- Barra de búsqueda, botón de exportar y botón para agregar productos -->
+  <div class="d-flex justify-content-between mb-3">
+    <input
+      type="text"
+      class="form-control w-25"
+      placeholder="Buscar en toda la tabla..."
+      [(ngModel)]="searchTerm"
+    />
+    <div>
+      <button
+        class="btn btn-outline-primary me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#agregarProductoModal"
+      >
+        <i class="bi bi-plus-circle"></i> Agregar Producto
+      </button>
+      <button class="btn btn-outline-success" (click)="exportToExcel()">
+        <i class="bi bi-file-earmark-excel"></i> Descargar Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla con filtros, búsqueda y ordenamiento -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th>Acciones</th>
+          <th (click)="ordenarPor('id_producto')" class="sortable">
+            ID Producto
+            <span *ngIf="criterioOrdenamiento === 'id_producto'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th (click)="ordenarPor('nombre')" class="sortable">
+            Nombre
+            <span *ngIf="criterioOrdenamiento === 'nombre'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th (click)="ordenarPor('referencia')" class="sortable">
+            Referencia
+            <span *ngIf="criterioOrdenamiento === 'referencia'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th (click)="ordenarPor('tipo')" class="sortable">
+            Tipo
+            <span *ngIf="criterioOrdenamiento === 'tipo'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th (click)="ordenarPor('cliente')" class="sortable">
+            Cliente
+            <span *ngIf="criterioOrdenamiento === 'cliente'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th (click)="ordenarPor('fecha_codificacion')" class="sortable">
+            Fecha Codificación
+            <span *ngIf="criterioOrdenamiento === 'fecha_codificacion'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+          <th (click)="ordenarPor('usuario_codifico')" class="sortable">
+            Usuario que Codificó
+            <span *ngIf="criterioOrdenamiento === 'usuario_codifico'">
+              {{ ordenAscendente ? '▲' : '▼' }}
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of filteredProductos()">
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+          <td>{{ producto.id_producto }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.referencia }}</td>
+          <td>{{ producto.tipo }}</td>
+          <td>{{ producto.cliente }}</td>
+          <td>{{ producto.fecha_codificacion }}</td>
+          <td>{{ producto.usuario_codifico }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal para agregar producto -->
+<div
+  class="modal fade"
+  id="agregarProductoModal"
+  tabindex="-1"
+  aria-labelledby="agregarProductoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Llamar al componente del formulario aquí -->
+        <app-form-productos></app-form-productos>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

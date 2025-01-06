@@ -1,0 +1,250 @@
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <h4 class="mb-3">Información Básica del Cliente</h4>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="id_cliente">ID Cliente</label>
+        <input
+          type="text"
+          id="id_cliente"
+          class="form-control"
+          formControlName="id_cliente"
+          placeholder="Ingrese el ID del cliente"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          class="form-control"
+          formControlName="nombre"
+          placeholder="Ingrese el nombre del cliente"
+          required
+        />
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="representantelegal">Representante Legal</label>
+        <input
+          type="text"
+          id="representantelegal"
+          class="form-control"
+          formControlName="representantelegal"
+          placeholder="Ingrese el nombre del representante legal"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="correo">Correo</label>
+        <input
+          type="email"
+          id="correo"
+          class="form-control"
+          formControlName="correo"
+          placeholder="Ingrese el correo"
+          required
+        />
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="telefono">Teléfono</label>
+        <input
+          type="text"
+          id="telefono"
+          class="form-control"
+          formControlName="telefono"
+          placeholder="Ingrese el teléfono"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="direccion">Dirección</label>
+        <input
+          type="text"
+          id="direccion"
+          class="form-control"
+          formControlName="direccion"
+          placeholder="Ingrese la dirección"
+          required
+        />
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="fecha_registro">Fecha Registro</label>
+        <input
+          type="text"
+          id="fecha_registro"
+          class="form-control"
+          [value]="fechaActual"
+          disabled
+        />
+      </div>
+    </div>
+  
+    <h4 class="mb-3">Documentos Adjuntos</h4>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="camara_comercio">Cámara de Comercio</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-file-earmark"></i></span>
+          <input
+            type="file"
+            id="camara_comercio"
+            class="form-control"
+            (change)="onFileChange($event, 'camara_comercio')"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="rut">RUT</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-file-earmark"></i></span>
+          <input
+            type="file"
+            id="rut"
+            class="form-control"
+            (change)="onFileChange($event, 'rut')"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="cc_representante">Cédula Representante</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+          <input
+            type="file"
+            id="cc_representante"
+            class="form-control"
+            (change)="onFileChange($event, 'cc_representante')"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="certificacion_comercial">Certificación Comercial</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-file-earmark-text"></i></span>
+          <input
+            type="file"
+            id="certificacion_comercial"
+            class="form-control"
+            (change)="onFileChange($event, 'certificacion_comercial')"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="certificacion_bancaria">Certificación Bancaria</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-bank"></i></span>
+          <input
+            type="file"
+            id="certificacion_bancaria"
+            class="form-control"
+            (change)="onFileChange($event, 'certificacion_bancaria')"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="circular_170">Circular 170</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-file-earmark-richtext"></i></span>
+          <input
+            type="file"
+            id="circular_170"
+            class="form-control"
+            (change)="onFileChange($event, 'circular_170')"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="acuerdos_seguridad">Acuerdos de Seguridad</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+          <input
+            type="file"
+            id="acuerdos_seguridad"
+            class="form-control"
+            (change)="onFileChange($event, 'acuerdos_seguridad')"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="estados_financieros">Estados Financieros</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-cash-stack"></i></span>
+          <input
+            type="file"
+            id="estados_financieros"
+            class="form-control"
+            (change)="onFileChange($event, 'estados_financieros')"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="autorizacion_tratamiento_datos">Autorización de Datos</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-shield-check"></i></span>
+          <input
+            type="file"
+            id="autorizacion_tratamiento_datos"
+            class="form-control"
+            (change)="onFileChange($event, 'autorizacion_tratamiento_datos')"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="visita">Visita</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
+          <input
+            type="file"
+            id="visita"
+            class="form-control"
+            (change)="onFileChange($event, 'visita')"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="antecedentes_judiciales">Antecedentes Judiciales</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-clipboard-check"></i></span>
+          <input
+            type="file"
+            id="antecedentes_judiciales"
+            class="form-control"
+            (change)="onFileChange($event, 'antecedentes_judiciales')"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <button
+      type="submit"
+      class="btn btn-primary btn-block mt-3"
+      [disabled]="!clienteForm.valid"
+    >
+      Guardar Cliente
+    </button>
+  </form>
+  

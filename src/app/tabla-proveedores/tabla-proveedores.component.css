@@ -1,0 +1,28 @@
+.table th,
+.table td {
+  vertical-align: middle;
+  font-size: 0.9rem; /* Ajusta el tamaño del texto */
+}
+
+.table .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+.table .btn-outline-secondary i,
+.table .btn-outline-danger i {
+  font-size: 1rem; /* Ajusta el tamaño de los íconos */
+}
+
+.table .btn-outline-primary i {
+    font-size: 1.1rem; /* Tamaño del ícono */
+    vertical-align: middle;
+  }
+  
+.table .btn-outline-primary {
+    padding: 0.25rem 0.5rem; /* Tamaño del botón */
+  }
+
+
+
+  

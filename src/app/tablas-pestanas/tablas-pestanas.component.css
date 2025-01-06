@@ -1,0 +1,39 @@
+.nav-tabs .nav-link {
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .nav-tabs .nav-link.active {
+    background: linear-gradient(135deg, #add8e6, #87ceeb, #4682b4);
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Suaviza la transición */
+  }
+  
+  .nav-tabs .nav-link.active:hover {
+    background: #24bbe5; /* Cambia todo el fondo al color deseado */
+    color: white;
+    border: 1px solid #000000;
+  }
+  
+ 
+  .accordion-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .accordion-header button {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .accordion-body {
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  

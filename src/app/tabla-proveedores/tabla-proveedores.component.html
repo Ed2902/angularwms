@@ -1,0 +1,159 @@
+<h1 class="text-center mb-4">Proveedores del Sistema</h1>
+<div class="container mt-3">
+  <!-- Barra de búsqueda, botón de exportar y agregar -->
+  <div class="d-flex justify-content-between mb-3">
+    <input
+      type="text"
+      class="form-control w-25"
+      placeholder="Buscar en toda la tabla..."
+      [(ngModel)]="searchTerm"
+    />
+    <div>
+      <button
+        class="btn btn-outline-primary me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#agregarProveedorModal"
+      >
+        <i class="bi bi-plus-circle"></i> Agregar Proveedor
+      </button>
+      <button class="btn btn-outline-success" (click)="exportToExcel()" style="margin-right: 60px;">
+        <i class="bi bi-file-earmark-excel"></i> Descargar Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla con datos y documentos -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center" style="margin-right: 50px;">
+      <thead class="thead-light">
+        <tr>
+          <th>Acciones</th>
+          <th>Nit</th>
+          <th>Nombre</th>
+          <th>Representante Legal</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Fecha Registro</th>
+          <th>Cámara Comercio</th>
+          <th>RUT</th>
+          <th>CC Representante</th>
+          <th>Certificación Comercial</th>
+          <th>Certificación Bancaria</th>
+          <th>Circular 170</th>
+          <th>Acuerdos Seguridad</th>
+          <th>Estados Financieros</th>
+          <th>Autorización Tratamiento Datos</th>
+          <th>Visita</th>
+          <th>Antecedentes Judiciales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proveedor of filteredProveedores()">
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+          <td>{{ proveedor.id_proveedor }}</td>
+          <td>{{ proveedor.nombre }}</td>
+          <td>{{ proveedor.representantelegal }}</td>
+          <td>{{ proveedor.correo }}</td>
+          <td>{{ proveedor.telefono }}</td>
+          <td>{{ proveedor.direccion }}</td>
+          <td>{{ proveedor.fecha_registro }}</td>
+          <td>
+            <a [href]="proveedor.camara_comercio" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.camara_comercio)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.rut" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.rut)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.cc_representante" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.cc_representante)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.certificacion_comercial" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.certificacion_comercial)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.certificacion_bancaria" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.certificacion_bancaria)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.circular_170" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.circular_170)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.acuerdos_seguridad" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.acuerdos_seguridad)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.estados_financieros" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.estados_financieros)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.autorizacion_tratamiento_datos" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.autorizacion_tratamiento_datos)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.visita" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.visita)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="proveedor.antecedentes_judiciales" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(proveedor.antecedentes_judiciales)"></i>
+            </a>
+          </td>          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal para agregar proveedor -->
+<div
+  class="modal fade"
+  id="agregarProveedorModal"
+  tabindex="-1"
+  aria-labelledby="agregarProveedorModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg"> <!-- Hacemos el modal más grande -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarProveedorModalLabel">Agregar Proveedor</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Incluir el formulario de proveedores -->
+        <app-form-proveedores></app-form-proveedores>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

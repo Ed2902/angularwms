@@ -1,0 +1,165 @@
+<div class="tabs-container">
+  <!-- Navegación de pestañas -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let tab of tabs; let i = index">
+      <a
+        class="nav-link"
+        [class.active]="selectedTab === i"
+        (click)="selectTab(i)">
+        {{ tab.label }}
+      </a>
+    </li>
+  </ul>
+
+  <!-- Contenido de pestañas -->
+  <div class="tab-content mt-3">
+    <!-- Pestaña 1: Órdenes de Servicio -->
+    <div *ngIf="selectedTab === 0">
+      <!-- Botón para abrir el modal -->
+      <button
+        class="btn btn-outline-success mb-2"
+        data-bs-toggle="modal"
+        data-bs-target="#agregarOrdenModal">
+        <i class="bi bi-plus"></i> Agregar Orden
+      </button>
+
+      <!-- Tabla de Órdenes de Servicio -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>FW</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Cliente</th>
+            <th>Proveedor</th>
+            <th>Usuario</th>
+            <th>Modificar</th>
+            <th>Acción a realizar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let orden of ordenes">
+            <td>{{ orden.fw }}</td>
+            <td>{{ orden.fecha }}</td>
+            <td>{{ orden.descripcion }}</td>
+            <td>{{ orden.estado }}</td>
+            <td>{{ orden.cliente }}</td>
+            <td>{{ orden.proveedor }}</td>
+            <td>{{ orden.usuario }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm">Modificar</button>
+            </td>
+            <td>
+              <button class="btn btn-success btn-sm">Acción</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal para agregar orden -->
+    <div
+      class="modal fade"
+      id="agregarOrdenModal"
+      tabindex="-1"
+      aria-labelledby="agregarOrdenModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agregarOrdenModalLabel">Agregar Orden</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Componente formordenservi -->
+            <app-formordenservi></app-formordenservi>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña 2: Instrucciones de Proceso -->
+    <div *ngIf="selectedTab === 1">
+      <div *ngFor="let instruccion of instrucciones" class="accordion-item mb-3">
+        <div class="accordion-header">
+          <button class="btn btn-link" (click)="toggleAccordion(instruccion.fw)">
+            {{ instruccion.fw }}
+          </button>
+        </div>
+        <div class="accordion-body" *ngIf="instruccion.expanded">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Instrucción</th>
+                <th>Servicio</th>
+                <th>Fecha para Ejecución</th>
+                <th>Fecha para Finalización</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Estado</th>
+                <th>Productos</th>
+                <th>Personas</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detalle of instruccion.detalles">
+                <td>{{ detalle.instruccion }}</td>
+                <td>{{ detalle.servicio }}</td>
+                <td>{{ detalle.fechaEjecucion }}</td>
+                <td>{{ detalle.fechaFinalizacion }}</td>
+                <td>{{ detalle.fechaInicio }}</td>
+                <td>{{ detalle.fechaFin }}</td>
+                <td>{{ detalle.estado }}</td>
+                <td>{{ detalle.productos }}</td>
+                <td>{{ detalle.personas }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm">Acción</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña 3: Procesos -->
+    <div *ngIf="selectedTab === 2">
+      <div *ngFor="let proceso of procesos" class="accordion-item mb-3">
+        <div class="accordion-header">
+          <button class="btn btn-link" (click)="toggleAccordion(proceso.fw)">
+            {{ proceso.fw }}
+          </button>
+        </div>
+        <div class="accordion-body" *ngIf="proceso.expanded">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID Producto</th>
+                <th>Cantidad</th>
+                <th>Nombre Producto</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detalle of proceso.detalles">
+                <td>{{ detalle.idProducto }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.nombreProducto }}</td>
+                <td>{{ detalle.estado }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

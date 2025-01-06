@@ -1,0 +1,79 @@
+<nav class="sidebar bg-light shadow" [class.collapsed]="isCollapsed">
+  <!-- Logo y Botón Expandir -->
+  <div class="sidebar-top d-flex align-items-center justify-content-between px-3 py-2">
+    <div class="logo-wrapper d-flex align-items-center">
+      <img src="assets/LOGO.fastway.png" alt="Logo Empresa" class="logo-small me-2" />
+    </div>
+    <!-- Botón Expandir/Colapsar -->
+    <button class="btn btn-sm btn-outline-secondary toggle-btn" (click)="toggleSidebar()">
+      <i class="bi" [ngClass]="isCollapsed ? 'bi-chevron-right' : 'bi-chevron-left'"></i>
+    </button>
+  </div>
+
+  <!-- Links Principales -->
+  <div class="sidebar-links px-3">
+    <h6 class="text-muted mt-3">Menu</h6>
+    <ul class="list-unstyled">
+      <li>
+        <a href="#" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-house me-2"></i>
+          <span *ngIf="!isCollapsed">Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-clipboard me-2"></i>
+          <span *ngIf="!isCollapsed">Reportes</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/operaciones" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-briefcase me-2"></i>
+          <span *ngIf="!isCollapsed">Operaciones</span>
+        </a>        
+      </li>
+      <li>
+        <a routerLink="/productos" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-box-seam me-2"></i>
+          <span *ngIf="!isCollapsed">Productos</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/proveedores" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-truck me-2"></i>
+          <span *ngIf="!isCollapsed">Proveedores</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/clientes" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-people me-2"></i>
+          <span *ngIf="!isCollapsed">Clientes</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-building me-2"></i>
+          <span *ngIf="!isCollapsed">Bodegas</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="d-flex align-items-center py-2 text-dark text-decoration-none">
+          <i class="bi bi-file-earmark me-2"></i>
+          <span *ngIf="!isCollapsed">Documentos</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Perfil y Cerrar Sesión -->
+  <div class="sidebar-bottom mt-auto px-3 py-3 border-top">
+    <div class="d-flex align-items-center">
+      <img src="assets/profile.png" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;" />
+      <div *ngIf="!isCollapsed">
+        <p class="mb-0 fw-bold">Joe Doe</p>
+        <p class="mb-0 text-muted" style="font-size: 0.85rem;">joe.doe.com</p>
+      </div>
+      <a href="#" class="ms-auto text-danger"><i class="bi bi-box-arrow-right"></i></a>
+    </div>
+  </div>
+</nav>

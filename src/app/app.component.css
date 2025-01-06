@@ -1,0 +1,11 @@
+.content-wrapper {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 260px; /* Ancho completo del sidebar */
+  margin-top: 20px;
+}
+
+.content-wrapper.collapsed {
+  margin-left: 80px; /* Ancho reducido del sidebar colapsado */
+}
+
+

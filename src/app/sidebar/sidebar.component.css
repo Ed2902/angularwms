@@ -1,0 +1,140 @@
+/* Sidebar General */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f8f9fa; /* Color claro */
+  transition: width 0.3s ease-in-out; /* Animación al colapsar */
+  box-shadow: 4px 0 15px rgba(21, 197, 224, 0.4), /* Sombra principal más fuerte */
+              0px 0 10px rgba(0, 0, 0, 0.1);      /* Sombra secundaria sutil */
+  overflow: hidden; /* Evita desbordamiento al colapsar */
+  z-index: 1000; /* Asegurar que esté por encima del contenido */
+}
+
+
+/* Sidebar Expandido y Colapsado */
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar .logo-wrapper img {
+  height: 40px;
+}
+
+.sidebar .logo-wrapper span {
+  transition: opacity 0.3s ease-in-out; /* Transición para texto */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Sidebar Links */
+.sidebar-links h6 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #7d6f6c; /* Color gris para encabezados */
+}
+
+.sidebar-links ul {
+  padding-left: 0;
+  list-style: none; /* Sin viñetas */
+}
+
+.sidebar-links ul li a {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  color: #212529; /* Texto oscuro */
+  text-decoration: none;
+}
+
+.sidebar-links ul li a:hover {
+  background-color: #ED8020; /* Fondo claro al pasar el mouse */
+}
+
+.sidebar-links ul li a .bi {
+  font-size: 1.2rem; /* Tamaño de íconos */
+}
+
+.sidebar-links ul li a span {
+  transition: opacity 0.3s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Enlace Activo */
+.sidebar-links ul li a.active {
+  background-color: #007bff; /* Fondo azul */
+  color: white; /* Texto blanco */
+}
+
+/* Perfil y Cerrar Sesión */
+.sidebar-bottom {
+  border-top: 1px solid #e9ecef; /* Línea separadora */
+  padding: 1rem;
+}
+
+.sidebar-bottom img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Imagen redondeada */
+}
+
+.sidebar-bottom .logout {
+  margin-left: auto;
+  color: #f86909; /* Rojo para cerrar sesión */
+  font-size: 1.2rem;
+}
+
+.sidebar-bottom .logout:hover {
+  color: #f86909; /* Rojo más oscuro al pasar el mouse */
+}
+
+/* Botón de Expandir/Colapsar */
+.toggle-btn {
+  background: #ffffff; /* Fondo blanco */
+  border: 1px solid #e9ecef; /* Bordes claros */
+  cursor: pointer;
+  color: #f86909; /* Color gris */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  position: absolute;
+  top: 48px;
+  right: -10px; /* Hacer visible cuando está colapsado */
+  z-index: 1001; /* Asegurar que esté encima del sidebar */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Botón redondeado */
+}
+
+.toggle-btn:hover {
+  color: #ffffff; /* Color más oscuro al pasar el mouse */
+  background-color: #37acda; /* Fondo más claro */
+}
+
+/* Ocultar Texto al Colapsar */
+.sidebar.collapsed .logo-wrapper span,
+.sidebar.collapsed .sidebar-links ul li a span,
+.sidebar.collapsed .sidebar-bottom div {
+  opacity: 0;
+  pointer-events: none; /* Deshabilitar interacción con el texto */
+}
+
+.sidebar.collapsed .sidebar-links ul li a {
+  justify-content: center; /* Centrar íconos */
+}
+
+.sidebar.collapsed .toggle-btn {
+  transform: rotate(0deg); /* Asegura la rotación correcta */
+}

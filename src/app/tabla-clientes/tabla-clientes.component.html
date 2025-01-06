@@ -1,0 +1,154 @@
+<h1 class="text-center mb-4">Clientes del Sistema</h1>
+<div class="container mt-3">
+  <!-- Barra de búsqueda y botones -->
+  <div class="d-flex justify-content-between mb-3">
+    <input
+      type="text"
+      class="form-control w-25"
+      placeholder="Buscar en toda la tabla..."
+      [(ngModel)]="searchTerm"
+    />
+    <div>
+      <button
+        class="btn btn-outline-primary me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#agregarClienteModal"
+      >
+        <i class="bi bi-plus-circle"></i> Agregar Cliente
+      </button>
+      <button class="btn btn-outline-success" (click)="exportToExcel()" style="margin-right: 60px;">
+        <i class="bi bi-file-earmark-excel"></i> Descargar Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center" style="margin-right: 50px;">
+      <thead class="thead-light">
+        <tr>
+          <th>Acciones</th>
+          <th>ID Cliente</th>
+          <th>Nombre</th>
+          <th>Representante Legal</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Fecha Registro</th>
+          <th>Cámara Comercio</th>
+          <th>RUT</th>
+          <th>CC Representante</th>
+          <th>Certificación Comercial</th>
+          <th>Certificación Bancaria</th>
+          <th>Circular 170</th>
+          <th>Acuerdos Seguridad</th>
+          <th>Estados Financieros</th>
+          <th>Autorización Tratamiento Datos</th>
+          <th>Visita</th>
+          <th>Antecedentes Judiciales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of filteredClientes()">
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+          <td>{{ cliente.id_cliente }}</td>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.representantelegal }}</td>
+          <td>{{ cliente.correo }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td>{{ cliente.direccion }}</td>
+          <td>{{ cliente.fecha_registro }}</td>
+          <td>
+            <a [href]="cliente.camara_comercio" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.camara_comercio)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.rut" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.rut)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.cc_representante" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.cc_representante)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.certificacion_comercial" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.certificacion_comercial)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.certificacion_bancaria" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.certificacion_bancaria)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.circular_170" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.circular_170)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.acuerdos_seguridad" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.acuerdos_seguridad)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.estados_financieros" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.estados_financieros)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.autorizacion_tratamiento_datos" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.autorizacion_tratamiento_datos)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.visita" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.visita)"></i>
+            </a>
+          </td>
+          <td>
+            <a [href]="cliente.antecedentes_judiciales" download class="btn btn-sm btn-outline-primary">
+              <i class="bi" [ngClass]="getFileIcon(cliente.antecedentes_judiciales)"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal para agregar cliente -->
+<div
+  class="modal fade"
+  id="agregarClienteModal"
+  tabindex="-1"
+  aria-labelledby="agregarClienteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarClienteModalLabel">Agregar Cliente</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí se incluye el formulario de clientes -->
+        <app-form-clientes></app-form-clientes>
+      </div>
+    </div>
+  </div>
+</div>
