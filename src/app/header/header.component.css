@@ -2,10 +2,9 @@
     background-color: #ed8020; /* Fondo oscuro */
     color: white;
     height: 40px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
     margin-top: -20px;
     margin-bottom: 20px;
-    margin-left: -100px;
+    margin-left: -260px;
  }
   
   .user-profile {

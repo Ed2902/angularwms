@@ -1,20 +1,26 @@
 /* Sidebar General */
 .sidebar {
   width: 250px;
-  height: 100vh;
-  border-radius: 40px;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #f8f9fa; /* Color claro */
+  background: linear-gradient(#ed8020, rgba(248, 249, 250, 0.605)), 
+              url('/assets/bodega.png'); /* Gradiente superpuesto sobre la imagen */
+  background-size: cover; /* Escala la imagen para cubrir todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
   transition: width 0.3s ease-in-out; /* Animación al colapsar */
   box-shadow: 4px 0 15px rgba(21, 197, 224, 0.4), /* Sombra principal más fuerte */
               0px 0 10px rgba(0, 0, 0, 0.1);      /* Sombra secundaria sutil */
   overflow: hidden; /* Evita desbordamiento al colapsar */
   z-index: 1000; /* Asegurar que esté por encima del contenido */
+  border: none;
+  margin-top: 40px;
 }
+
 
 
 /* Sidebar Expandido y Colapsado */
@@ -57,7 +63,7 @@
 }
 
 .sidebar-links ul li a:hover {
-  background-color: #ED8020; /* Fondo claro al pasar el mouse */
+  background-color: rgb(237, 128, 32); /* Fondo claro al pasar el mouse */
 }
 
 .sidebar-links ul li a .bi {
