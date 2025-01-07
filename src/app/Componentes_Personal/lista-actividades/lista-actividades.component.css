@@ -1,0 +1,69 @@
+.lista-actividades {
+    margin: 20px;
+  }
+  
+  .tabla-actividades {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tabla-actividades th, .tabla-actividades td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .tabla-actividades th {
+    background-color: #f4f4f4;
+  }
+  
+  .tabla-actividades .Alta {
+    color: red;
+  }
+  
+  .tabla-actividades .Media {
+    color: orange;
+  }
+  
+  .tabla-actividades .Baja {
+    color: green;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal.active {
+    display: flex;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .close-btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    background: #d32f2f;
+  }
+  

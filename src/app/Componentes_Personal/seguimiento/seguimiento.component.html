@@ -1,0 +1,26 @@
+<div class="seguimiento">
+  <h2>Seguimiento de Actividades</h2>
+
+  <table class="tabla-seguimiento">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre de la Actividad</th>
+        <th>Estado</th>
+        <th>Tiempo Transcurrido</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let actividad of actividadesEnProgreso; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ actividad.nombre }}</td>
+        <td>{{ actividad.estado }}</td>
+        <td>{{ calcularTiempo(actividad) }}</td>
+        <td>
+          <button (click)="finalizarActividad(actividad)">Finalizar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

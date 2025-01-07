@@ -1,0 +1,40 @@
+<div class="lista-actividades">
+  <h2>Lista de Actividades</h2>
+
+  <table class="tabla-actividades">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre de la Actividad</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let actividad of actividades; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ actividad.nombre }}</td>
+        <td [ngClass]="actividad.prioridad">{{ actividad.prioridad }}</td>
+        <td>{{ actividad.estado }}</td>
+        <td>
+          <button (click)="abrirModal(actividad)">Detalles</button>
+          <button (click)="iniciarActividad(actividad)" *ngIf="actividad.estado === 'Pendiente'">Iniciar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal" [class.active]="modalAbierto">
+    <div class="modal-content">
+      <ng-container *ngIf="actividadSeleccionada; else sinActividad">
+        <app-detalle-actividad></app-detalle-actividad>
+      </ng-container>
+      <ng-template #sinActividad>
+        <p>No se seleccionó ninguna actividad.</p>
+      </ng-template>
+      <button class="close-btn" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,10 @@ import { FormProveedoresComponent } from './form-proveedores/form-proveedores.co
 import { TablaClientesComponent } from './tabla-clientes/tabla-clientes.component';
 import { FormClientesComponent } from './form-clientes/form-clientes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListaActividadesComponent } from './Componentes_Personal/lista-actividades/lista-actividades.component';
+import { SeguimientoComponent } from './Componentes_Personal/seguimiento/seguimiento.component';
+import { DetalleActividadComponent } from './Componentes_Personal/detalle-actividad/detalle-actividad.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormProveedoresComponent,
     TablaClientesComponent,
     FormClientesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ListaActividadesComponent,
+    SeguimientoComponent,
+    DetalleActividadComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+<div class="detalle-actividad">
+    <h2>Detalle de Actividad</h2>
+  
+    <div *ngIf="actividad">
+      <p><strong>Nombre:</strong> {{ actividad.nombre }}</p>
+      <p><strong>Prioridad:</strong> {{ actividad.prioridad }}</p>
+      <p><strong>Estado:</strong> {{ actividad.estado }}</p>
+      <p><strong>Hora de Inicio:</strong> {{ actividad.horaInicio | date:'short' }}</p>
+      <p *ngIf="actividad.horaFin"><strong>Hora de Finalización:</strong> {{ actividad.horaFin | date:'short' }}</p>
+      <p><strong>Descripción:</strong> {{ actividad.descripcion || 'Sin descripción disponible.' }}</p>
+    </div>
+  
+    <button (click)="volver()">Volver</button>
+  </div>
+  

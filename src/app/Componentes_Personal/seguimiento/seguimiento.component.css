@@ -1,0 +1,32 @@
+.seguimiento {
+  margin: 20px;
+}
+
+.tabla-seguimiento {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-seguimiento th,
+.tabla-seguimiento td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.tabla-seguimiento th {
+  background-color: #f4f4f4;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
