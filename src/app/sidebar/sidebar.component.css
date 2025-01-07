@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: linear-gradient(#ed8020, rgba(248, 249, 250, 0.605)), 
+  background: linear-gradient(#ed8020, rgba(248, 249, 250, 0.497)), 
               url('/assets/bodega.png'); /* Gradiente superpuesto sobre la imagen */
   background-size: cover; /* Escala la imagen para cubrir todo el contenedor */
   background-position: center; /* Centra la imagen */
