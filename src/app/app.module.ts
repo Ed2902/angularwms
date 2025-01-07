@@ -13,6 +13,7 @@ import { TablaProveedoresComponent } from './tabla-proveedores/tabla-proveedores
 import { FormProveedoresComponent } from './form-proveedores/form-proveedores.component';
 import { TablaClientesComponent } from './tabla-clientes/tabla-clientes.component';
 import { FormClientesComponent } from './form-clientes/form-clientes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormClientesComponent } from './form-clientes/form-clientes.component';
     TablaProveedoresComponent,
     FormProveedoresComponent,
     TablaClientesComponent,
-    FormClientesComponent
+    FormClientesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

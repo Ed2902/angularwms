@@ -1,0 +1,130 @@
+<div class="dashboard-container">
+  <!-- Indicadores -->
+  <div class="indicators row mb-4">
+    <div class="col-md-3 indicator-box">
+      <h5>Despachos</h5>
+      <h2 style="color: #007BFF;">5,456</h2>
+      <p><span style="color: green;">+14%</span></p>
+    </div>
+    <div class="col-md-3 indicator-box">
+      <h5>Operaciones</h5>
+      <h2 style="color: #ED8020;">4,764</h2>
+      <p><span style="color: red;">-8%</span></p>
+    </div>
+    <div class="col-md-3 indicator-box">
+      <h5>Limpiezas</h5>
+      <h2 style="color: green;">1.5k</h2>
+      <p><span style="color: green;">+15%</span></p>
+    </div>
+    <div class="col-md-3 indicator-box">
+      <h5>Ventas</h5>
+      <h2 style="color: #ED8020;">$31,564</h2>
+      <p><span style="color: orange;">+76%</span></p>
+    </div>
+  </div>
+
+  <!-- Gráfico Principal -->
+  <div class="charts row mb-4">
+    <div class="col-md-12">
+      <canvas #mainChart></canvas>
+    </div>
+  </div>
+
+  <!-- Seis Gráficos Secundarios -->
+  <div class="charts row mb-4">
+    <div class="col-md-4">
+      <canvas #chart1></canvas>
+    </div>
+    <div class="col-md-4">
+      <canvas #chart2></canvas>
+    </div>
+    <div class="col-md-4">
+      <canvas #chart3></canvas>
+    </div>
+    <div class="col-md-4">
+      <canvas #chart4></canvas>
+    </div>
+    <div class="col-md-4">
+      <canvas #chart5></canvas>
+    </div>
+    <div class="col-md-4">
+      <canvas #chart6></canvas>
+    </div>
+  </div>
+
+  <!-- Cuatro Tablas -->
+  <div class="tables row">
+    <div class="col-md-6 mb-4">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tabla1; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6 mb-4">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tabla2; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6 mb-4">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tabla3; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6 mb-4">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Meta</th>
+            <th>Porcentaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tabla4; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.target }}</td>
+            <td>{{ item.percentage }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
