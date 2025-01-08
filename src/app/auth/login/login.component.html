@@ -1,0 +1,16 @@
+<div class="login-box">
+    <img src="assets/img/logo.png" alt="Fastway">
+    <h2>Ingreso</h2>
+    <form (ngSubmit)="login()">
+      <div class="user-box">
+        <input type="text" [(ngModel)]="credentials.name_user" name="name_user" required />
+        <label>Usuario</label>
+      </div>
+      <div class="user-box">
+        <input type="password" [(ngModel)]="credentials.password" name="password" required />
+        <label>Contraseña</label>
+      </div>
+      <button type="submit" class="btn">Ingresar</button>
+    </form>
+  </div>
+  

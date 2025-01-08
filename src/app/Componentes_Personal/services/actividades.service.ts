@@ -29,4 +29,14 @@ export class ActividadesService {
   finalizarActividad(id: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/actividades-asignadas/${id}/terminar`, {});
   }
+
+  // Método para obtener el historial completo
+  obtenerHistorial(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/historial`);
+  }
+
+  // Método para obtener el historial filtrado por usuario
+  obtenerHistorialPorUsuario(idUsuario: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/historial/${idUsuario}`);
+  }
 }

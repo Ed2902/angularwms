@@ -1,0 +1,99 @@
+<div class="historial">
+    <h2 class="text-center mb-4">Historial de Actividades</h2>
+  
+    <!-- Filtro de fechas -->
+    <div class="filtros-fecha d-flex justify-content-center mb-4">
+      <div class="me-3">
+        <label for="fechaInicio">Fecha Inicio:</label>
+        <input
+          type="date"
+          id="fechaInicio"
+          class="form-control"
+          [(ngModel)]="fechaInicio"
+          (change)="filtrarPorFechas()"
+        />
+      </div>
+      <div>
+        <label for="fechaFin">Fecha Fin:</label>
+        <input
+          type="date"
+          id="fechaFin"
+          class="form-control"
+          [(ngModel)]="fechaFin"
+          (change)="filtrarPorFechas()"
+        />
+      </div>
+    </div>
+  
+    <!-- Tabla: Resumen por Usuario -->
+    <div class="tabla-resumen mb-4">
+      <h3 class="text-center">Resumen por Usuario</h3>
+      <table class="table table-sm table-bordered table-hover text-center">
+        <thead class="table-light">
+          <tr>
+            <th>Usuario</th>
+            <th>Total de Actividades</th>
+            <th>Duración Total (min)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let resumen of resumenPorUsuario">
+            <td>{{ resumen.usuario }}</td>
+            <td>{{ resumen.totalActividades }}</td>
+            <td>{{ resumen.totalDuracion | number: '1.0-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Tabla: Actividades Filtradas -->
+    <div class="tabla-filtrada mb-4">
+      <h3 class="text-center">Actividades por Período</h3>
+      <table class="table table-sm table-bordered table-hover text-center">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Nombre de la Actividad</th>
+            <th>Usuario</th>
+            <th>Duración (min)</th>
+            <th>Estado</th>
+            <th>Fecha Modificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let actividad of historialFiltrado; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ actividad.nombre_actividad }}</td>
+            <td>{{ actividad.nombre_usuario }}</td>
+            <td>{{ actividad.duracion | number: '1.0-2' }}</td>
+            <td>{{ actividad.estado }}</td>
+            <td>{{ actividad.fecha_modificacion | date: 'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="historialFiltrado.length === 0" class="text-center text-muted">
+        No se encontraron actividades en el rango de fechas seleccionado.
+      </p>
+    </div>
+  
+    <!-- Gráficos -->
+    <div class="graficos row">
+      <div class="col-md-6 mb-4">
+        <h3 class="text-center">Actividades por Día</h3>
+        <canvas id="graficoActividadesPorDia"></canvas>
+      </div>
+      <div class="col-md-6 mb-4">
+        <h3 class="text-center">Duración Promedio</h3>
+        <canvas id="graficoDuracionPromedio"></canvas>
+      </div>
+      <div class="col-md-6 mb-4">
+        <h3 class="text-center">Actividades por Usuario</h3>
+        <canvas id="graficoActividadesPorUsuario"></canvas>
+      </div>
+      <div class="col-md-6 mb-4">
+        <h3 class="text-center">Distribución por Estado</h3>
+        <canvas id="graficoEstadosActividades"></canvas>
+      </div>
+    </div>
+  </div>
+  

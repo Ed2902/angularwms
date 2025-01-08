@@ -25,13 +25,15 @@
 
   <!-- Gráfico Principal -->
   <div class="charts row mb-4">
-    <div class="col-md-12">
+    <div class="col-md-11" style="margin-left: 35px;">
       <canvas #mainChart></canvas>
     </div>
   </div>
 
-  <!-- Seis Gráficos Secundarios -->
-  <div class="charts row mb-4">
+<!-- Seis Gráficos Secundarios -->
+<div class="charts row mb-4">
+  <!-- Primera Fila de Gráficos -->
+  <div class="row" style="margin-left: 20px;">
     <div class="col-md-4">
       <canvas #chart1></canvas>
     </div>
@@ -41,6 +43,9 @@
     <div class="col-md-4">
       <canvas #chart3></canvas>
     </div>
+  </div>
+  <!-- Segunda Fila de Gráficos -->
+  <div class="row">
     <div class="col-md-4">
       <canvas #chart4></canvas>
     </div>
@@ -51,6 +56,7 @@
       <canvas #chart6></canvas>
     </div>
   </div>
+</div>
 
   <!-- Cuatro Tablas -->
   <div class="tables row">

@@ -1,0 +1,37 @@
+.historial {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2, h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .table {
+    font-size: 0.875rem;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .filtros-fecha {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .filtros-fecha label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .form-control {
+    font-size: 0.875rem;
+  }
+  
+  .graficos canvas {
+    max-height: 300px;
+  }
+  

@@ -1,11 +1,22 @@
+/* Contenedor principal con flexbox */
+.d-flex {
+  display: flex;
+  height: 100vh; /* Para ocupar toda la altura */
+  overflow: hidden; /* Evita desbordamientos */
+}
+
 .content-wrapper {
-  transition: margin-left 0.3s ease-in-out;
-  margin-left: 260px; /* Ancho completo del sidebar */
-  margin-top: 20px;
+  flex: 1; /* Permite que el contenido principal ocupe todo el espacio restante */
+  display: flex;
+  flex-direction: column; /* Alinea los hijos verticalmente */
+  overflow: auto; /* Permite desplazamiento si el contenido excede */
+  transition: margin-left 0.3s ease; /* Transición suave al abrir/cerrar el slider */
 }
 
 .content-wrapper.collapsed {
-  margin-left: 80px; /* Ancho reducido del sidebar colapsado */
+  margin-left: 70px; /* Ancho reducido cuando el slider está cerrado */
 }
 
-
+.content-wrapper:not(.collapsed) {
+  margin-left: 250px; /* Ancho completo cuando el slider está abierto */
+}

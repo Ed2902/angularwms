@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; // Importa HttpClientModule y HTTP_INTERCEPTORS
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormordenserviComponent } from './formordenservi/formordenservi.component';
@@ -17,9 +19,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListaActividadesComponent } from './Componentes_Personal/lista-actividades/lista-actividades.component';
 import { SeguimientoComponent } from './Componentes_Personal/seguimiento/seguimiento.component';
 import { DetalleActividadComponent } from './Componentes_Personal/detalle-actividad/detalle-actividad.component';
+import { HistorialComponent } from './Componentes_Personal/historial/historial.component';
 
-// Importa HttpClientModule para gestionar solicitudes HTTP
-import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor'; // Importa el interceptor
 
 @NgModule({
   declarations: [
@@ -37,16 +39,23 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     ListaActividadesComponent,
     SeguimientoComponent,
-    DetalleActividadComponent
+    DetalleActividadComponent,
+    HistorialComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule, // Ya estaba correctamente importado
-    FormsModule, // Ya estaba correctamente importado
-    HttpClientModule // Agregado aquí para solicitudes HTTP
+    ReactiveFormsModule, // Para formularios reactivos
+    FormsModule, // Para formularios basados en plantillas
+    HttpClientModule, // Para solicitudes HTTP
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true, // Permite agregar múltiples interceptores si es necesario
+    },
+  ],
+  bootstrap: [AppComponent], // Componente principal
 })
-export class AppModule { }
+export class AppModule {}
