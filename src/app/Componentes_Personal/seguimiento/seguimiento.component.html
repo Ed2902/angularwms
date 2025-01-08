@@ -1,26 +1,41 @@
-<div class="seguimiento">
-  <h2>Seguimiento de Actividades</h2>
-
-  <table class="tabla-seguimiento">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nombre de la Actividad</th>
-        <th>Estado</th>
-        <th>Tiempo Transcurrido</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let actividad of actividadesEnProgreso; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ actividad.nombre }}</td>
-        <td>{{ actividad.estado }}</td>
-        <td>{{ calcularTiempo(actividad) }}</td>
-        <td>
-          <button (click)="finalizarActividad(actividad)">Finalizar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container-fluid mt-3 seguimiento d-flex justify-content-center">
+  <div class="table-responsive w-100" style="max-width: 1200px;">
+    <h4 class="text-center mb-3">Actividades en Progreso</h4>
+    <table class="table table-sm table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col">Actividad</th>
+          <th scope="col" class="text-center">Estado</th>
+          <th scope="col" class="text-center">Tiempo</th>
+          <th scope="col" class="text-center">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actividad of actividadesEnProgreso; let i = index">
+          <td class="text-center">{{ i + 1 }}</td>
+          <td>{{ actividad.nombre_actividad }}</td>
+          <td class="text-center">
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-success': actividad.estado === 'En Progreso',
+                    'bg-warning': actividad.estado === 'Pendiente',
+                    'bg-danger': actividad.estado === 'Completado'
+                  }">
+              {{ actividad.estado }}
+            </span>
+          </td>
+          <td class="text-center">{{ calcularTiempo(actividad) }}</td>
+          <td class="text-center">
+            <button class="btn btn-outline-primary btn-sm px-3 py-1" (click)="finalizarActividad(actividad)">
+              Finalizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-center text-muted mt-2" *ngIf="actividadesEnProgreso.length === 0">
+      No hay actividades en progreso.
+    </p>
+  </div>
 </div>

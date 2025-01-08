@@ -1,32 +1,13 @@
 .seguimiento {
-  margin: 20px;
+  margin: 0; /* Quita márgenes externos */
+  padding: 0; /* Quita paddings externos */
 }
 
-.tabla-seguimiento {
-  width: 100%;
-  border-collapse: collapse;
+.table-responsive {
+  overflow-x: auto; /* Habilita scroll horizontal solo si es necesario */
 }
 
-.tabla-seguimiento th,
-.tabla-seguimiento td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-.tabla-seguimiento th {
-  background-color: #f4f4f4;
-}
-
-button {
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #45a049;
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }

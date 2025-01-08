@@ -67,3 +67,15 @@
     background: #d32f2f;
   }
   
+  .modal {
+    display: block; /* Fuerza el modal visible con d-block */
+  }
+  
+  .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  }
+  
+  .modal-content {
+    border-radius: 8px;
+  }
+  

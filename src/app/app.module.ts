@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importar FormsModule y ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -18,6 +18,8 @@ import { ListaActividadesComponent } from './Componentes_Personal/lista-activida
 import { SeguimientoComponent } from './Componentes_Personal/seguimiento/seguimiento.component';
 import { DetalleActividadComponent } from './Componentes_Personal/detalle-actividad/detalle-actividad.component';
 
+// Importa HttpClientModule para gestionar solicitudes HTTP
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,8 +42,9 @@ import { DetalleActividadComponent } from './Componentes_Personal/detalle-activi
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule, // Agregar ReactiveFormsModule aquí
-    FormsModule // Agregar FormsModule aquí
+    ReactiveFormsModule, // Ya estaba correctamente importado
+    FormsModule, // Ya estaba correctamente importado
+    HttpClientModule // Agregado aquí para solicitudes HTTP
   ],
   providers: [],
   bootstrap: [AppComponent]

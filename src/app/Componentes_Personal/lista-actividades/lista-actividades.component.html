@@ -1,40 +1,67 @@
-<div class="lista-actividades">
-  <h2>Lista de Actividades</h2>
-
-  <table class="tabla-actividades">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nombre de la Actividad</th>
-        <th>Prioridad</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let actividad of actividades; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ actividad.nombre }}</td>
-        <td [ngClass]="actividad.prioridad">{{ actividad.prioridad }}</td>
-        <td>{{ actividad.estado }}</td>
-        <td>
-          <button (click)="abrirModal(actividad)">Detalles</button>
-          <button (click)="iniciarActividad(actividad)" *ngIf="actividad.estado === 'Pendiente'">Iniciar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container-fluid mt-3 lista-actividades d-flex justify-content-center">
+  <div class="table-responsive w-100" style="max-width: 1200px;">
+    <h4 class="text-center mb-3">Lista de Actividades</h4>
+    <table class="table table-sm table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col">Nombre de la Actividad</th>
+          <th scope="col" class="text-center">Estado</th>
+          <th scope="col" class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actividad of actividades; let i = index">
+          <td class="text-center">{{ i + 1 }}</td>
+          <td>{{ actividad.nombre_actividad }}</td>
+          <td class="text-center">
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-success': actividad.estado === 'En Progreso',
+                    'bg-warning': actividad.estado === 'Pendiente',
+                    'bg-danger': actividad.estado === 'Completado'
+                  }">
+              {{ actividad.estado }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-outline-info btn-sm px-3 py-1" (click)="abrirModal(actividad)">Detalles</button>
+            <button class="btn btn-outline-primary btn-sm px-3 py-1" 
+                    (click)="iniciarActividad(actividad)" 
+                    *ngIf="actividad.estado === 'Pendiente'">
+              Iniciar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-center text-muted mt-2" *ngIf="actividades.length === 0">
+      No hay actividades disponibles.
+    </p>
+  </div>
 
   <!-- Modal -->
-  <div class="modal" [class.active]="modalAbierto">
+ <!-- Modal -->
+<div class="modal fade show" tabindex="-1" [class.d-block]="modalAbierto" *ngIf="modalAbierto">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <ng-container *ngIf="actividadSeleccionada; else sinActividad">
-        <app-detalle-actividad></app-detalle-actividad>
-      </ng-container>
-      <ng-template #sinActividad>
-        <p>No se seleccionó ninguna actividad.</p>
-      </ng-template>
-      <button class="close-btn" (click)="cerrarModal()">Cerrar</button>
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles de la Actividad</h5>
+        <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body">
+        <ng-container *ngIf="actividadSeleccionada; else sinActividad">
+          <p><strong>Nombre:</strong> {{ actividadSeleccionada.nombre_actividad }}</p>
+          <p><strong>Estado:</strong> {{ actividadSeleccionada.estado }}</p>
+          <p><strong>Descripción:</strong> {{ actividadSeleccionada.descripcion || 'Sin descripción' }}</p>
+        </ng-container>
+        <ng-template #sinActividad>
+          <p>No se seleccionó ninguna actividad.</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+      </div>
     </div>
   </div>
 </div>
