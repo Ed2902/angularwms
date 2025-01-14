@@ -13,6 +13,8 @@ import { SeguimientoComponent } from './Componentes_Personal/seguimiento/seguimi
 import { DetalleActividadComponent } from './Componentes_Personal/detalle-actividad/detalle-actividad.component';
 import { HistorialComponent } from './Componentes_Personal/historial/historial.component';
 
+
+
 const routes: Routes = [
   // Rutas protegidas con AuthGuard
   { path: 'operaciones', component: TablasPestanasComponent, canActivate: [AuthGuard] },
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'reportes', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'actividades', component: ListaActividadesComponent, canActivate: [AuthGuard] },
   { path: 'seguimiento', component: SeguimientoComponent, canActivate: [AuthGuard] },
+  { path: 'lista-actividades', component: ListaActividadesComponent, canActivate: [AuthGuard] },
   { path: 'actividades/detalle/:id', component: DetalleActividadComponent, canActivate: [AuthGuard] },
   { path: 'historial', component: HistorialComponent, canActivate: [AuthGuard] },
 
@@ -33,7 +36,7 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard], // Proteger la redirección según el estado
     children: [
-      { path: '', redirectTo: '/reportes', pathMatch: 'full' }, // Redirigir a reportes si está autenticado
+      { path: '', redirectTo: '/auth/login', pathMatch: 'full' }, // Redirigir a reportes si está autenticado
     ],
   },
 

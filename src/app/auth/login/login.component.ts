@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +8,26 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   credentials = { name_user: '', password: '' }; // Inicializar las credenciales
+  returnUrl: string = '/reportes'; // Ruta por defecto
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // Recuperar la URL de retorno desde los queryParams (si existe)
+    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/reportes';
+  }
 
   login(): void {
     this.authService.login(this.credentials).subscribe(
       (response) => {
         this.authService.saveToken(response.token); // Guardar el token
-        this.router.navigate(['/dashboard']); // Redirigir al dashboard
+        this.router.navigate([this.returnUrl]); // Redirigir a la ruta original
       },
       (error) => {
         console.error('Error en el inicio de sesión:', error);

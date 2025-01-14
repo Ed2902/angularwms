@@ -10,57 +10,39 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
   private baseUrl = 'http://localhost:3000/api/auth'; // URL de tu backend
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  private userSubject = new BehaviorSubject<any>(this.getUserInfoFromLocalStorage()); // Comienza con datos del localStorage
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  user$ = this.userSubject.asObservable(); // Observable para acceder a los datos del usuario
 
   constructor(private http: HttpClient, private router: Router) {}
 
   // Obtener el token desde localStorage
   getToken(): string | null {
-    return localStorage.getItem('token'); // Devuelve el token o null si no existe
+    return localStorage.getItem('token');
   }
 
   // Verificar si el usuario está autenticado
   isLoggedIn(): boolean {
     const token = this.getToken();
-  
-    // Si no hay token, no está autenticado
-    if (!token) {
-      console.log('No token found in localStorage.');
-      return false;
-    }
-  
+    if (!token) return false;
+
     try {
-      // Decodificar el payload del token
       const payload = JSON.parse(atob(token.split('.')[1]));
-  
-      // Validar que el payload tenga la propiedad 'exp'
-      if (!payload.exp) {
-        console.error('El token no tiene el campo exp.');
-        return false;
-      }
-  
-      // Obtener el tiempo actual en segundos
-      const currentTime = Math.floor(Date.now() / 1000);
-  
-      // Verificar si el token ha expirado
-      const isTokenValid = payload.exp > currentTime;
-      console.log('Token válido:', isTokenValid);
-  
-      return isTokenValid;
+      return payload.exp > Math.floor(Date.now() / 1000);
     } catch (error) {
       console.error('Error al decodificar el token:', error);
-      return false; // Token inválido
+      return false;
     }
   }
-  
 
   // Método para iniciar sesión
   login(credentials: { name_user: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials).pipe(
       tap((response: any) => {
         this.saveToken(response.token);
-        this.isAuthenticatedSubject.next(true); // Actualizar estado de autenticación
-        this.router.navigate(['/dashboard']); // Redirigir tras login exitoso
+        this.saveUserInfo(response.user); // Guardar todos los datos del usuario
+        this.isAuthenticatedSubject.next(true);
+        this.router.navigate(['/reportes']);
       })
     );
   }
@@ -68,29 +50,36 @@ export class AuthService {
   // Guardar el token en LocalStorage
   saveToken(token: string): void {
     localStorage.setItem('token', token);
-    console.log('Token guardado en localStorage.');
   }
 
-  getUserInfo(): { id_usuario: string; name_user: string } | null {
-    const token = this.getToken(); // Recupera el token desde localStorage
-    if (!token) {
-      return null; // Si no hay token, no hay usuario
-    }
-  
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload
-      return { id_usuario: payload.id_usuario, name_user: payload.name_user };
-    } catch (error) {
-      console.error('Error al decodificar el token:', error);
-      return null; // En caso de error, retorna null
-    }
+  // Guardar la información completa del usuario en LocalStorage y emitirla
+  saveUserInfo(user: any): void {
+    // Guardamos la información completa del usuario (nombre, correo, foto, etc.)
+    const userInfo = {
+      id_usuario: user.id_usuario,
+      name_user: user.name_user,
+      nombre: user.nombre,
+      email: user.email,
+      cargo: user.cargo,
+      foto: user.foto, // Guarda la URL de la foto de perfil
+    };
+
+    localStorage.setItem('user', JSON.stringify(userInfo)); // Guardamos la info del usuario en LocalStorage
+    this.userSubject.next(userInfo); // Emitimos los datos del usuario al BehaviorSubject
   }
 
+  // Obtener la información del usuario desde LocalStorage
+  getUserInfoFromLocalStorage(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null; // Devuelve los datos del usuario si existen en localStorage
+  }
 
   // Cerrar sesión
   logout(): void {
-    localStorage.removeItem('token'); // Eliminar el token
-    this.isAuthenticatedSubject.next(false); // Actualizar estado de autenticación
-    this.router.navigate(['/auth/login']); // Redirigir al login
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.isAuthenticatedSubject.next(false);
+    this.userSubject.next(null); // Limpiar la información del usuario
+    this.router.navigate(['/auth/login']);
   }
 }

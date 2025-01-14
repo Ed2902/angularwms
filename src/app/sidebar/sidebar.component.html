@@ -68,12 +68,14 @@
   <!-- Perfil y Cerrar Sesión -->
   <div class="sidebar-bottom mt-auto px-3 py-3 border-top">
     <div class="d-flex align-items-center">
-      <img src="assets/profile.png" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;" />
+      <!-- Usamos la foto del usuario -->
+      <img [src]="foto" alt="Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;" />
       <div *ngIf="!isCollapsed">
-        <p class="mb-0 fw-bold">Joe Doe</p>
-        <p class="mb-0 text-muted" style="font-size: 0.85rem;">joe.doe.com</p>
+        <p class="mb-0 fw-bold">{{ nombre }}</p> <!-- Mostrar el nombre del usuario -->
+        <p class="mb-0 text-muted" style="font-size: 0.85rem;">{{ email }}</p> <!-- Mostrar correo del usuario -->
       </div>
-      <a href="#" class="ms-auto text-danger"><i class="bi bi-box-arrow-right"></i></a>
+      <!-- Botón de Cerrar Sesión -->
+      <a href="#" (click)="logout()" class="ms-auto text-danger fs-4"><i class="bi bi-box-arrow-right"></i></a>
     </div>
   </div>
 </nav>
