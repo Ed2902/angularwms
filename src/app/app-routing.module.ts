@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard'; // Guard para proteger rutas
+import { AuthGuard } from './auth/auth.guard';
 
 // Componentes del layout principal
 import { TablasPestanasComponent } from './tablas-pestanas/tablas-pestanas.component';
@@ -12,7 +12,8 @@ import { ListaActividadesComponent } from './Componentes_Personal/lista-activida
 import { SeguimientoComponent } from './Componentes_Personal/seguimiento/seguimiento.component';
 import { DetalleActividadComponent } from './Componentes_Personal/detalle-actividad/detalle-actividad.component';
 import { HistorialComponent } from './Componentes_Personal/historial/historial.component';
-
+import { TabsOperacionComponent } from './tabs-operacion/tabs-operacion.component';
+import { OrdenesDeServicioComponent } from './ordenes-de-servicio/ordenes-de-servicio.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,9 @@ const routes: Routes = [
   { path: 'lista-actividades', component: ListaActividadesComponent, canActivate: [AuthGuard] },
   { path: 'actividades/detalle/:id', component: DetalleActividadComponent, canActivate: [AuthGuard] },
   { path: 'historial', component: HistorialComponent, canActivate: [AuthGuard] },
+  { path: 'tabs-operacion', component: TabsOperacionComponent, canActivate: [AuthGuard] },
+  { path: 'ordenes-servicio', component: OrdenesDeServicioComponent, canActivate: [AuthGuard] },
+
 
   // Ruta para autenticación
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
@@ -34,9 +38,9 @@ const routes: Routes = [
   // Redirección de la ruta raíz basada en estado de autenticación
   {
     path: '',
-    canActivate: [AuthGuard], // Proteger la redirección según el estado
+    canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: '/auth/login', pathMatch: 'full' }, // Redirigir a reportes si está autenticado
+      { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     ],
   },
 

@@ -1,0 +1,9 @@
+/* Opcional: Personaliza el diseño si lo deseas */
+.nav-link {
+    cursor: pointer;
+  }
+  
+  .tab-content {
+    background-color: #f8f9fa;
+  }
+  

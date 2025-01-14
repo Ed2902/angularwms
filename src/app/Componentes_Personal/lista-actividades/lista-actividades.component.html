@@ -1,6 +1,19 @@
 <div class="container-fluid mt-3 lista-actividades d-flex justify-content-center">
   <div class="table-responsive w-100" style="max-width: 1200px;">
     <h4 class="text-center mb-3">Lista de Actividades</h4>
+
+    <!-- 🔍 Campo de Búsqueda -->
+    <div class="input-group input-group-sm mb-3 w-25">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Buscar actividad..." 
+        [(ngModel)]="busqueda" 
+        (input)="filtrarActividades()">
+      <button class="btn btn-outline-secondary" type="button" (click)="limpiarBusqueda()">Limpiar</button>
+    </div>
+    
+
     <table class="table table-sm table-bordered table-hover align-middle">
       <thead class="table-light">
         <tr>
@@ -11,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let actividad of actividades; let i = index">
+        <tr *ngFor="let actividad of actividadesFiltradas; let i = index">
           <td class="text-center">{{ i + 1 }}</td>
           <td>{{ actividad.nombre_actividad }}</td>
           <td class="text-center">
@@ -35,32 +48,33 @@
         </tr>
       </tbody>
     </table>
-    <p class="text-center text-muted mt-2" *ngIf="actividades.length === 0">
-      No hay actividades disponibles.
+
+    <p class="text-center text-muted mt-2" *ngIf="actividadesFiltradas.length === 0">
+      No hay actividades que coincidan con la búsqueda.
     </p>
   </div>
 
   <!-- Modal -->
- <!-- Modal -->
-<div class="modal fade show" tabindex="-1" [class.d-block]="modalAbierto" *ngIf="modalAbierto">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Detalles de la Actividad</h5>
-        <button type="button" class="btn-close" (click)="cerrarModal()"></button>
-      </div>
-      <div class="modal-body">
-        <ng-container *ngIf="actividadSeleccionada; else sinActividad">
-          <p><strong>Nombre:</strong> {{ actividadSeleccionada.nombre_actividad }}</p>
-          <p><strong>Estado:</strong> {{ actividadSeleccionada.estado }}</p>
-          <p><strong>Descripción:</strong> {{ actividadSeleccionada.descripcion || 'Sin descripción' }}</p>
-        </ng-container>
-        <ng-template #sinActividad>
-          <p>No se seleccionó ninguna actividad.</p>
-        </ng-template>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+  <div class="modal fade show" tabindex="-1" [class.d-block]="modalAbierto" *ngIf="modalAbierto">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalles de la Actividad</h5>
+          <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <ng-container *ngIf="actividadSeleccionada; else sinActividad">
+            <p><strong>Nombre:</strong> {{ actividadSeleccionada.nombre_actividad }}</p>
+            <p><strong>Estado:</strong> {{ actividadSeleccionada.estado }}</p>
+            <p><strong>Descripción:</strong> {{ actividadSeleccionada.descripcion || 'Sin descripción' }}</p>
+          </ng-container>
+          <ng-template #sinActividad>
+            <p>No se seleccionó ninguna actividad.</p>
+          </ng-template>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+        </div>
       </div>
     </div>
   </div>

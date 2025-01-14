@@ -1,32 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActividadesService } from '../services/actividades.service';
- // Importar el servicio
 
 @Component({
   selector: 'app-lista-actividades',
   standalone: false,
   templateUrl: './lista-actividades.component.html',
   styleUrls: ['./lista-actividades.component.css'],
-  
 })
 export class ListaActividadesComponent implements OnInit {
-  actividades: any[] = []; // Inicialmente vacío
+  actividades: any[] = [];
+  actividadesFiltradas: any[] = [];
+  busqueda: string = '';
   modalAbierto = false;
   actividadSeleccionada: any = null;
 
   constructor(private actividadesService: ActividadesService) {}
 
   ngOnInit(): void {
-    this.cargarActividades(); // Cargar actividades al inicializar el componente
+    this.cargarActividades();
   }
 
-  // Método para cargar actividades desde el API
   cargarActividades(): void {
-    const idUsuario = '1a2b3c4d-5678-9abc-def0-1234567890ab'; // ID ficticio del usuario
+    const idUsuario = '1a2b3c4d-5678-9abc-def0-1234567890ab';
     this.actividadesService.obtenerActividades(idUsuario).subscribe(
       (data) => {
-        this.actividades = data; // Asignar las actividades obtenidas del API
-        console.log('Actividades cargadas:', this.actividades);
+        this.actividades = data;
+        this.actividadesFiltradas = data; // Inicializar el filtro con todas las actividades
       },
       (error) => {
         console.error('Error al cargar actividades:', error);
@@ -34,21 +33,32 @@ export class ListaActividadesComponent implements OnInit {
     );
   }
 
+  filtrarActividades(): void {
+    const termino = this.busqueda.toLowerCase().trim();
+    this.actividadesFiltradas = this.actividades.filter(actividad =>
+      actividad.nombre_actividad.toLowerCase().includes(termino)
+    );
+  }
+
+  limpiarBusqueda(): void {
+    this.busqueda = '';
+    this.actividadesFiltradas = [...this.actividades]; // Restablecer la lista completa
+  }
+
   abrirModal(actividad: any): void {
-    this.modalAbierto = true; // Abre el modal
-    this.actividadSeleccionada = actividad; // Asigna la actividad seleccionada
+    this.modalAbierto = true;
+    this.actividadSeleccionada = actividad;
   }
-  
+
   cerrarModal(): void {
-    this.modalAbierto = false; // Cierra el modal
-    this.actividadSeleccionada = null; // Limpia la actividad seleccionada
+    this.modalAbierto = false;
+    this.actividadSeleccionada = null;
   }
-  
+
   iniciarActividad(actividad: any): void {
     this.actividadesService.iniciarActividad(actividad.id_asignacion).subscribe(
       (response) => {
-        actividad.estado = 'En Progreso'; // Actualizar el estado localmente
-        console.log('Actividad iniciada:', response);
+        actividad.estado = 'En Progreso';
       },
       (error) => {
         console.error('Error al iniciar actividad:', error);

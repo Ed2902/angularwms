@@ -8,36 +8,52 @@ import { ActividadesService } from '../services/actividades.service';
   styleUrls: ['./seguimiento.component.css']
 })
 export class SeguimientoComponent implements OnInit, OnDestroy {
-  actividadesEnProgreso: any[] = []; // Lista de actividades
-  intervalId: any; // Para almacenar el ID del intervalo
+  actividadesEnProgreso: any[] = [];
+  actividadesFiltradas: any[] = []; // 🔎 Lista para filtrar
+  busqueda: string = '';
+  intervalId: any;
 
   constructor(private actividadesService: ActividadesService) {}
 
   ngOnInit(): void {
     this.cargarActividadesEnProgreso();
 
-    // Actualizar el tiempo cada segundo
     this.intervalId = setInterval(() => {
-      this.actividadesEnProgreso = [...this.actividadesEnProgreso]; // Forzar actualización del componente
+      this.actividadesFiltradas = [...this.actividadesFiltradas];
     }, 1000);
   }
 
   ngOnDestroy(): void {
     if (this.intervalId) {
-      clearInterval(this.intervalId); // Limpiar el intervalo al destruir el componente
+      clearInterval(this.intervalId);
     }
   }
 
   cargarActividadesEnProgreso(): void {
-    const idUsuario = '1a2b3c4d-5678-9abc-def0-1234567890ab'; // ID ficticio del usuario
+    const idUsuario = '1a2b3c4d-5678-9abc-def0-1234567890ab';
     this.actividadesService.obtenerActividadesEnSeguimiento(idUsuario).subscribe(
       (data) => {
         this.actividadesEnProgreso = data;
+        this.actividadesFiltradas = data; // Inicializamos la lista filtrada
       },
       (error) => {
         console.error('Error al cargar actividades en progreso:', error);
       }
     );
+  }
+
+  // 🔍 Método para filtrar actividades
+  filtrarActividades(): void {
+    const termino = this.busqueda.toLowerCase().trim();
+    this.actividadesFiltradas = this.actividadesEnProgreso.filter(actividad =>
+      actividad.nombre_actividad.toLowerCase().includes(termino)
+    );
+  }
+
+  // 🧹 Método para limpiar la búsqueda
+  limpiarBusqueda(): void {
+    this.busqueda = '';
+    this.actividadesFiltradas = [...this.actividadesEnProgreso];
   }
 
   calcularTiempo(actividad: any): string {
@@ -68,8 +84,9 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
 
   finalizarActividad(actividad: any): void {
     this.actividadesService.finalizarActividad(actividad.id_asignacion).subscribe(
-      (response) => {
+      () => {
         this.actividadesEnProgreso = this.actividadesEnProgreso.filter((a) => a.id_asignacion !== actividad.id_asignacion);
+        this.filtrarActividades(); // Actualizar la lista filtrada
       },
       (error) => {
         console.error('Error al finalizar actividad:', error);

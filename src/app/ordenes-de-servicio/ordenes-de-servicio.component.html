@@ -1,0 +1,121 @@
+<h4 class="text-center mb-4">Órdenes de Servicio</h4>
+<div class="container mt-3">
+  <!-- Barra de búsqueda, botón de exportar y botón para agregar orden -->
+  <div class="d-flex justify-content-between mb-3">
+    <input
+      type="text"
+      class="form-control w-25"
+      placeholder="Buscar en toda la tabla..."
+      [(ngModel)]="searchTerm"
+    />
+    <div>
+      <button
+        class="btn btn-outline-primary me-2"
+        (click)="abrirModalAgregar()"
+      >
+        <i class="bi bi-plus-circle"></i> Agregar Orden
+      </button>
+      <button class="btn btn-outline-success" (click)="exportToExcel()">
+        <i class="bi bi-file-earmark-excel"></i> Descargar Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla de Órdenes de Servicio -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th>Acciones</th>
+          <th (click)="ordenarPor('fw')" class="sortable">FW</th>
+          <th (click)="ordenarPor('fecha')" class="sortable">Fecha</th>
+          <th (click)="ordenarPor('descripcion')" class="sortable">Descripción</th>
+          <th (click)="ordenarPor('estado')" class="sortable">Estado</th>
+          <th (click)="ordenarPor('cliente')" class="sortable">Cliente</th>
+          <th (click)="ordenarPor('proveedor')" class="sortable">Proveedor</th>
+          <th (click)="ordenarPor('usuario')" class="sortable">Usuario</th>
+          <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let orden of filteredOrdenes()">
+          <td>
+            <button class="btn btn-sm btn-outline-secondary me-1" (click)="editarOrden(orden)">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="eliminarOrden(orden)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+          <td>{{ orden.fw }}</td>
+          <td>{{ orden.fecha }}</td>
+          <td>{{ orden.descripcion }}</td>
+          <td>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-success': orden.estado === 'Completado',
+                    'bg-warning': orden.estado === 'Pendiente',
+                    'bg-info': orden.estado === 'En Proceso'
+                  }">
+              {{ orden.estado }}
+            </span>
+          </td>
+          <td>{{ orden.cliente }}</td>
+          <td>{{ orden.proveedor }}</td>
+          <td>{{ orden.usuario }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-info" (click)="abrirModalDetalles(orden)">
+              <i class="bi bi-eye"></i> Detalles
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal Detalles -->
+<div
+  class="modal fade"
+  tabindex="-1"
+  [class.show]="modalDetallesAbierto"
+  [ngStyle]="{'display': modalDetallesAbierto ? 'block' : 'none'}"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles de la Orden</h5>
+        <button type="button" class="btn-close" (click)="cerrarModalDetalles()"></button>
+      </div>
+      <div class="modal-body">
+        <h1 class="text-center">Acá van los productos</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cerrarModalDetalles()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Agregar -->
+<div
+  class="modal fade"
+  tabindex="-1"
+  [class.show]="modalAgregarAbierto"
+  [ngStyle]="{'display': modalAgregarAbierto ? 'block' : 'none'}"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Orden de Servicio</h5>
+        <button type="button" class="btn-close" (click)="cerrarModalAgregar()"></button>
+      </div>
+      <div class="modal-body">
+        <h1>hola</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cerrarModalAgregar()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

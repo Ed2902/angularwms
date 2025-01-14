@@ -21,7 +21,9 @@ import { SeguimientoComponent } from './Componentes_Personal/seguimiento/seguimi
 import { DetalleActividadComponent } from './Componentes_Personal/detalle-actividad/detalle-actividad.component';
 import { HistorialComponent } from './Componentes_Personal/historial/historial.component';
 
-import { AuthInterceptor } from './auth/auth.interceptor'; // Importa el interceptor
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { TabsOperacionComponent } from './tabs-operacion/tabs-operacion.component';
+import { OrdenesDeServicioComponent } from './ordenes-de-servicio/ordenes-de-servicio.component'; // Importa el interceptor
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { AuthInterceptor } from './auth/auth.interceptor'; // Importa el interce
     SeguimientoComponent,
     DetalleActividadComponent,
     HistorialComponent,
+    TabsOperacionComponent,
+    OrdenesDeServicioComponent,
   ],
   imports: [
     BrowserModule,
