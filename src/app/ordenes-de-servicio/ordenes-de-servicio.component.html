@@ -53,13 +53,13 @@
           <td>
             <span class="badge"
                   [ngClass]="{
-                    'bg-success': orden.estado === 'Completado',
-                    'bg-warning': orden.estado === 'Pendiente',
-                    'bg-info': orden.estado === 'En Proceso'
+                    'bg-success': orden.estado === 'Abierto',
+                    'bg-danger': orden.estado === 'Cerrado',
+                    'bg-warning': orden.estado === 'Sin_Producto'
                   }">
               {{ orden.estado }}
             </span>
-          </td>
+          </td>          
           <td>{{ orden.cliente }}</td>
           <td>{{ orden.proveedor }}</td>
           <td>{{ orden.usuario }}</td>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { OrdenesDeServicioService } from './ordenes-de-servicio.service';
 
 @Component({
   selector: 'app-ordenes-de-servicio',
@@ -6,15 +7,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./ordenes-de-servicio.component.css'],
   standalone: false
 })
-export class OrdenesDeServicioComponent {
-  ordenes: any[] = [
-    { fw: 'FW001', fecha: '2024-01-15', descripcion: 'Revisión de equipos', estado: 'Pendiente', cliente: 'Cliente A', proveedor: 'Proveedor X', usuario: 'Usuario 1' }
-  ];
+export class OrdenesDeServicioComponent implements OnInit {
 
+  ordenes: any[] = [];
   searchTerm: string = '';
   modalDetallesAbierto: boolean = false;
   modalAgregarAbierto: boolean = false;
   ordenSeleccionada: any = null;
+
+  constructor(private ordenesService: OrdenesDeServicioService) {}
+
+  ngOnInit(): void {
+    this.cargarOrdenes();  // 🔄 Cargar datos al iniciar
+  }
+
+  // 🔍 Cargar órdenes de servicio desde la API
+  cargarOrdenes(): void {
+    this.ordenesService.obtenerOrdenes().subscribe(
+      (data) => {
+        this.ordenes = data;
+      },
+      (error) => {
+        console.error('Error al cargar las órdenes de servicio', error);
+      }
+    );
+  }
 
   filteredOrdenes(): any[] {
     return this.searchTerm

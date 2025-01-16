@@ -58,15 +58,15 @@
               {{ ordenAscendente ? '▲' : '▼' }}
             </span>
           </th>
-          <th (click)="ordenarPor('fecha_codificacion')" class="sortable">
+          <th (click)="ordenarPor('fecha')" class="sortable">
             Fecha Codificación
-            <span *ngIf="criterioOrdenamiento === 'fecha_codificacion'">
+            <span *ngIf="criterioOrdenamiento === 'fecha'">
               {{ ordenAscendente ? '▲' : '▼' }}
             </span>
           </th>
-          <th (click)="ordenarPor('usuario_codifico')" class="sortable">
+          <th (click)="ordenarPor('usuario')" class="sortable">
             Usuario que Codificó
-            <span *ngIf="criterioOrdenamiento === 'usuario_codifico'">
+            <span *ngIf="criterioOrdenamiento === 'usuario'">
               {{ ordenAscendente ? '▲' : '▼' }}
             </span>
           </th>
@@ -87,8 +87,17 @@
           <td>{{ producto.referencia }}</td>
           <td>{{ producto.tipo }}</td>
           <td>{{ producto.cliente }}</td>
-          <td>{{ producto.fecha_codificacion }}</td>
-          <td>{{ producto.usuario_codifico }}</td>
+
+          <!-- ✅ Fecha Corregida -->
+          <td>{{ producto.fecha }}</td>
+
+          <!-- ✅ Usuario Corregido -->
+          <td>{{ producto.usuario }}</td>
+        </tr>
+
+        <!-- Mensaje si no hay productos -->
+        <tr *ngIf="filteredProductos().length === 0">
+          <td colspan="8" class="text-center">No hay productos disponibles.</td>
         </tr>
       </tbody>
     </table>

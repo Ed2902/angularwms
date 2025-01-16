@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
+import { ProductosService } from './productos.service';  // ✅ Importar el servicio
 
 @Component({
   selector: 'app-tabla-productos',
@@ -7,35 +8,46 @@ import * as XLSX from 'xlsx';
   templateUrl: './tabla-productos.component.html',
   styleUrls: ['./tabla-productos.component.css']
 })
-export class TablaProductosComponent {
-  productos = [
-    {
-      id_producto: 'P001',
-      nombre: 'Producto A',
-      referencia: 'REF001',
-      tipo: 'Tipo 1',
-      cliente: 'Cliente 1',
-      fecha_codificacion: '2023-01-01',
-      usuario_codifico: 'Usuario 1'
-    },
-    // Agrega más datos aquí
-  ];
-
+export class TablaProductosComponent implements OnInit {
+  
+  productos: any[] = [];  // ✅ Inicializar como vacío
   searchTerm: string = '';
   criterioOrdenamiento: string = '';
   ordenAscendente: boolean = true;
 
-  // Filtrar productos según búsqueda
+  constructor(private productosService: ProductosService) {}
+
+  // ✅ Cargar los productos al iniciar el componente
+  ngOnInit(): void {
+    this.cargarProductos();
+  }
+
+  // ✅ Llamar al servicio para obtener productos
+  cargarProductos(): void {
+    this.productosService.obtenerProductos().subscribe(
+      (data) => {
+        this.productos = data;
+        console.log('Productos cargados:', data);
+      },
+      (error) => {
+        console.error('Error al cargar productos', error);
+      }
+    );
+  }
+
+  // ✅ Filtrar productos según búsqueda
   filteredProductos() {
     return this.productos
       .filter((producto) =>
         Object.values(producto).some((value) =>
-          value.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
+          value && value.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
         )
       )
       .sort((a, b) => this.comparar(a, b));
   }
+  
 
+  // ✅ Comparar productos para ordenar
   comparar(a: any, b: any): number {
     if (!this.criterioOrdenamiento) return 0;
 
@@ -55,6 +67,7 @@ export class TablaProductosComponent {
     return 0;
   }
 
+  // ✅ Cambiar el criterio de ordenamiento
   ordenarPor(campo: string): void {
     if (this.criterioOrdenamiento === campo) {
       this.ordenAscendente = !this.ordenAscendente;
@@ -64,12 +77,11 @@ export class TablaProductosComponent {
     }
   }
 
+  // ✅ Exportar la tabla de productos a Excel
   exportToExcel(): void {
     const worksheet = XLSX.utils.json_to_sheet(this.productos);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Productos');
     XLSX.writeFile(workbook, 'Productos.xlsx');
   }
-
- 
 }
